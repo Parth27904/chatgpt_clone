@@ -7,7 +7,6 @@ A pixel-perfect, feature-rich ChatGPT clone built with Flutter, showcasing clean
 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI Badge">
 <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary Badge">
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB Badge">
-<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License Badge">
 </p>
 
 ✨ Features
