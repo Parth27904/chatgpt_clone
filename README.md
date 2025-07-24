@@ -1,4 +1,4 @@
-#🚀 ChatGPT Flutter Clone
+🚀 ChatGPT Flutter Clone
 A pixel-perfect, feature-rich ChatGPT clone built with Flutter, showcasing clean architecture, BLoC state management, and direct integration with OpenAI API, Cloudinary for image uploads, and MongoDB for chat history persistence.
 
 <p align="center">
@@ -7,6 +7,7 @@ A pixel-perfect, feature-rich ChatGPT clone built with Flutter, showcasing clean
 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI Badge">
 <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary Badge">
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB Badge">
+<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License Badge">
 </p>
 
 ✨ Features
@@ -120,7 +121,44 @@ cd YOUR_REPOSITORY_FOLDER
 3. Install Dependencies
 flutter pub get
 
-4. Run the Application
+4. Configure Environment Variables
+Create a file named .env in the root of your project (same level as pubspec.yaml).
+
+OPENAI_API_KEY="sk-YOUR_OPENAI_API_KEY"
+CLOUDINARY_CLOUD_NAME="YOUR_CLOUDINARY_CLOUD_NAME"
+CLOUDINARY_UPLOAD_PRESET="YOUR_CLOUDINARY_UPLOAD_PRESET_NAME"
+MONGO_DB_CONNECTION_STRING="YOUR_MONGODB_CONNECTION_STRING"
+
+Important:
+
+Replace placeholders with your actual keys/names.
+
+Wrap values in double quotes.
+
+Do NOT commit this .env file to public repositories! Add .env to your .gitignore.
+
+5. Update pubspec.yaml Assets
+Ensure your .env file is included as an asset. Open pubspec.yaml and add:
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env # Make sure this line is present
+
+Then run flutter pub get again.
+
+6. iOS Specific Setup
+If you are building for iOS, you need to add privacy descriptions to ios/Runner/Info.plist:
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>This app needs access to your photo library to allow you to select images for chat messages.</string>
+<key>NSCameraUsageDescription</key>
+<string>This app needs access to your camera to allow you to take photos for chat messages.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs access to your microphone to allow you to record voice messages.</string>
+
+7. Run the Application
 flutter run
 
 Connect an Android or iOS device/emulator. The app should launch.
@@ -156,3 +194,4 @@ Error Handling: More granular and user-friendly error messages and retry mechani
 UI/UX Polish: Add subtle animations, better empty states, and haptic feedback.
 
 Unit & Integration Tests: Implement comprehensive tests for BLoCs, repositories, and UI.
+
