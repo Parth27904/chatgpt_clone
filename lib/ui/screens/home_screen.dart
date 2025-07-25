@@ -1,4 +1,3 @@
-// lib/ui/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chatgpt_clone/bloc/chat/chat_bloc.dart';
@@ -19,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  final FocusNode _chatInputFocusNode = FocusNode(); // <--- Managed at HomeScreen level
+  final FocusNode _chatInputFocusNode = FocusNode();
 
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (content.isNotEmpty || imageFileToSend != null) {
       chatBloc.add(SendMessage(content: content, imageFile: imageFileToSend));
       _textController.clear();
-      _chatInputFocusNode.unfocus(); // Unfocus after sending
+      _chatInputFocusNode.unfocus();
       _scrollToBottom();
     }
   }
@@ -55,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    // Initial request for focus when HomeScreen is first built (for new chat)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _chatInputFocusNode.requestFocus();
       print('HomeScreen: Initial focus requested in initState.');
@@ -66,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _textController.dispose();
     _scrollController.dispose();
-    _chatInputFocusNode.dispose(); // <--- Dispose the FocusNode
+    _chatInputFocusNode.dispose();
     super.dispose();
   }
 
@@ -79,28 +77,34 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           surfaceTintColor: Colors.transparent,
           toolbarHeight: kToolbarHeight,
-          automaticallyImplyLeading: false, // No default back button
-          // The 'leading' widget is for the far left of the AppBar.
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: Image.asset("assets/img.png"),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
+          automaticallyImplyLeading: false,
+          // **MODIFIED**: Set title alignment to left
+          centerTitle: false,
+          // **MODIFIED**: Adjust spacing for the left-aligned title
+          titleSpacing: 0.0,
+          // **MODIFIED**: The title now contains both the icon and the text
+          title: Row(
+            children: [
+              Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: Image.asset("assets/img.png"),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  );
                 },
-              );
-            },
+              ),
+              Text(
+                'ChatGPT',
+                style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
-          // The 'title' widget is automatically centered.
-          title: Text(
-            'ChatGPT',
-            style: GoogleFonts.inter(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          // 'actions' are a list of widgets for the far right.
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
